@@ -13,8 +13,10 @@ function generateDiv(sideLength) {
   div.classList.add('square')
   div.style.width = `${sideLength}px`
   div.style.height = `${sideLength}px`
-  generateRandomColors()
-  div.addEventListener('mouseover', () => div.style.backgroundColor = `rgb(${red} ${green} ${blue})`)
+  div.addEventListener('mouseover', () => {
+    generateRandomColors()
+    div.style.backgroundColor = `rgb(${red} ${green} ${blue})`
+  })
   container.appendChild(div)
 }
 
