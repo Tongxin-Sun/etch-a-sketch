@@ -1,12 +1,20 @@
 let numSquares = 16
+let red, green, blue
 const container = document.getElementById("container")
+
+function generateRandomColors() {
+  red = Math.floor(Math.random() * 255)
+  green = Math.floor(Math.random() * 255)
+  blue = Math.floor(Math.random() * 255)
+}
 
 function generateDiv(sideLength) {
   const div = document.createElement('div')
   div.classList.add('square')
   div.style.width = `${sideLength}px`
   div.style.height = `${sideLength}px`
-  div.addEventListener('mouseover', () => div.classList.add('color'))
+  generateRandomColors()
+  div.addEventListener('mouseover', () => div.style.backgroundColor = `rgb(${red} ${green} ${blue})`)
   container.appendChild(div)
 }
 
