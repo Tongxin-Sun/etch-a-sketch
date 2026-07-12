@@ -1,22 +1,25 @@
 let numSquares = 16
-let red, green, blue
 const container = document.getElementById("container")
 
-function generateRandomColors() {
-  red = Math.floor(Math.random() * 255)
-  green = Math.floor(Math.random() * 255)
-  blue = Math.floor(Math.random() * 255)
+const generateRandomColor = () => Math.floor(Math.random() * 255)
+
+function renderSquare(event) {
+  const div = event.currentTarget
+  const intensity = parseInt(div.dataset.colorIntensity) + 1
+  div.dataset.colorIntensity = intensity.toString()
+  const opacity = Math.min(intensity / 10, 1)
+  const { r, g, b } = JSON.parse(div.dataset.color)
+  div.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`
 }
 
 function generateDiv(sideLength) {
   const div = document.createElement('div')
-  div.classList.add('square')
+  div.dataset.colorIntensity = '0'
+  const r = generateRandomColor(), g = generateRandomColor(), b = generateRandomColor()
+  div.dataset.color = JSON.stringify({ r, g, b })
   div.style.width = `${sideLength}px`
   div.style.height = `${sideLength}px`
-  div.addEventListener('mouseover', () => {
-    generateRandomColors()
-    div.style.backgroundColor = `rgb(${red} ${green} ${blue})`
-  })
+  div.addEventListener('mouseover', renderSquare)
   container.appendChild(div)
 }
 
